@@ -1,9 +1,7 @@
 from django.db import models
 import pytz
 
-# Create your models here.
 class Book(models.Model):
-
     COVERS = [
         ('hardcover', 'Hardcover'),
         ('paperback', 'Paperback'),
@@ -34,19 +32,27 @@ class Book(models.Model):
     genres = models.ManyToManyField('Genre', related_name='books', blank=True)
     topics = models.ManyToManyField('Topic', related_name='books', blank=True)
 
+    def __str__(self):
+        return self.title
+
 class Author(models.Model):
     TITLES = [
-            ('ks', "Ks."),
-            ('dr', "Dr."),
-            ('prof', "Prof."),
-            ('mr', "Mr."),
-            ('ms', "Ms."),
-        ]
+        ('ks', "Ks."),
+        ('dr', "Dr."),
+        ('prof', "Prof."),
+        ('mr', "Mr."),
+        ('ms', "Ms."),
+    ]
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     nationality = models.CharField(max_length=100)
     title = models.CharField(max_length=20, choices=TITLES, blank=True, null=True)
     alias = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        if self.alias:
+            return f"{self.first_name} {self.last_name} ({self.alias})"
+        return f"{self.first_name} {self.last_name}"
 
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
@@ -54,20 +60,34 @@ class Publisher(models.Model):
     founded_year = models.IntegerField()
     website = models.URLField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    # books = models.ManyToOneField(Book, related_name='publisher')
+
+    def __str__(self):
+        return self.name
 
 class Genre(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 class Series(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 class Topic(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 class Note(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE,)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Notatka do: {self.book.title} ({self.created_at.strftime('%Y-%m-%d')})"

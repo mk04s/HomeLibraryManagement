@@ -7,11 +7,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="bg-[#f0f0f0] min-h-screen">
-    <nav class="bg-slate-800 text-white shadow-md">
+   <nav class="bg-slate-800 text-white shadow-md">
       <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="{% url 'index' %}" class="text-xl font-bold hover:text-amber-400 transition">Biblioteka Domowa</a>
+        <a href="{% url 'manage_books:index' %}" class="text-xl font-bold hover:text-amber-400 transition">Biblioteka Domowa</a>
         <div class="flex items-center gap-6">
-          <a href="{% url 'index' %}" class="hover:text-amber-400 transition">Ksiazki</a>
+          <a href="{% url 'manage_books:index' %}" class="hover:text-amber-400 transition">Ksiazki</a>
           <a href="#" class="hover:text-amber-400 transition">Autorzy</a>
           <a href="#" class="hover:text-amber-400 transition">Wydawcy</a>
           <a href="#" class="hover:text-amber-400 transition">Serie</a>
@@ -26,7 +26,7 @@
     </main>
     <footer class="fixed bottom-0 w-full bg-slate-800 text-white shadow-md">
          <div class="max-w-6xl mx-auto px-4 py-3 text-center text-sm">
-            &copy; 2024 Biblioteka Domowa. Wszelkie prawa zastrzeżone.
+            &copy; 2026 Biblioteka Domowa. Wszelkie prawa zastrzeżone.
          </div>
     </footer>
   </body>
