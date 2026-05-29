@@ -1,33 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Biblioteka Domowa{% endblock %}</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="bg-[#f0f0f0] min-h-screen">
-   <nav class="bg-slate-800 text-white shadow-md">
-      <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="{% url 'manage_books:index' %}" class="text-xl font-bold hover:text-amber-400 transition">Biblioteka Domowa</a>
-        <div class="flex items-center gap-6">
-          <a href="{% url 'manage_books:index' %}" class="hover:text-amber-400 transition">Ksiazki</a>
-          <a href="#" class="hover:text-amber-400 transition">Autorzy</a>
-          <a href="#" class="hover:text-amber-400 transition">Wydawcy</a>
-          <a href="#" class="hover:text-amber-400 transition">Serie</a>
-          <a href="#" class="hover:text-amber-400 transition">Gatunki</a>
-          <a href="#" class="hover:text-amber-400 transition">Tematy</a>
+  <body class="bg-[#f0f0f0] min-h-screen flex flex-col justify-between text-slate-800">
+    
+    <nav class="bg-slate-800 text-white shadow-md sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+        
+        <a href="{% url 'manage_books:index' %}" class="text-xl font-bold hover:text-amber-400 transition flex items-center gap-2">
+          📚 Biblioteka Domowa
+        </a>
+        
+        <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-sm font-medium">
+          <a href="{% url 'manage_books:index' %}" class="hover:text-amber-400 transition py-1">Książki</a>
+          <a href="{% url 'manage_books:authors_list' %}" class="hover:text-amber-400 transition py-1">Autorzy</a>
+          <a href="{% url 'manage_books:publishers_list' %}" class="hover:text-amber-400 transition py-1">Wydawcy</a>
+          
+          <a href="{% url 'manage_books:series_list' %}" class="text-slate-400 hover:text-amber-400 transition py-1 opacity-75 hover:opacity-100">Serie</a>
+          <a href="{% url 'manage_books:genres_list' %}" class="text-slate-400 hover:text-amber-400 transition py-1 opacity-75 hover:opacity-100">Gatunki</a>
+          <a href="{% url 'manage_books:notes_list' %}" class="text-slate-400 hover:text-amber-400 transition py-1 opacity-75 hover:opacity-100">Tematy</a>
         </div>
+
       </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto">
+    <main class="max-w-6xl w-full mx-auto px-4 mb-auto">
       {% block content %}{% endblock %}
     </main>
-    <footer class="fixed bottom-0 w-full bg-slate-800 text-white shadow-md">
-         <div class="max-w-6xl mx-auto px-4 py-3 text-center text-sm">
-            &copy; 2026 Biblioteka Domowa. Wszelkie prawa zastrzeżone.
+
+    <footer class="w-full bg-slate-800 text-white mt-12 shadow-inner">
+         <div class="max-w-6xl mx-auto px-4 py-4 text-center text-xs text-slate-400">
+            &copy; 2026 Biblioteka Domowa. Wszelkie prawa zastrzeżone. Stworzono z pasji do książek.
          </div>
     </footer>
+
   </body>
 </html>

@@ -7,7 +7,7 @@
     <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl font-bold text-slate-800">Twoje Książki</h1>
         <span class="bg-amber-400 text-slate-800 px-3 py-1 rounded-full font-semibold text-sm">
-            Łącznie: {{ books|length }}
+            Łącznie w bazie: {{ books|length }}
         </span>
     </div>
 
@@ -17,24 +17,41 @@
             {% for book in books %}
                 <div class="bg-white rounded-lg shadow-md p-6 border border-slate-100 hover:shadow-xl transition flex flex-col justify-between">
                     <div>
-                        <h2 class="text-xl font-bold text-slate-800 mb-2">{{ book.title }}</h2>
+                        <h2 class="text-xl font-bold text-slate-800 mb-3">{{ book.title }}</h2>
                         
-                        <p class="text-slate-600 mb-1">
+                        <p class="text-slate-600 text-sm mb-1">
                             <strong>Autor:</strong> 
                             {% for author in book.authors.all %}
                                 {{ author }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                <span class="text-slate-400 italic">Brak autora</span>
                             {% endfor %}
                         </p>
-                        <p class="text-slate-600 mb-4 text-sm">
+
+                        <p class="text-slate-600 text-sm mb-3">
                             <strong>Gatunek:</strong> 
                             {% for genre in book.genres.all %}
                                 {{ genre }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                <span class="text-slate-400 italic">Brak gatunku</span>
                             {% endfor %}
+                        </p>
+
+                        <hr class="border-slate-100 mb-3">
+
+                        <p class="text-slate-500 text-xs mb-1">
+                            <strong>Język:</strong> {{ book.get_language_display|default:book.language }}
+                        </p>
+                        <p class="text-slate-500 text-xs mb-1">
+                            <strong>Okładka:</strong> {{ book.get_cover_display|default:book.cover }}
+                        </p>
+                        <p class="text-slate-500 text-xs">
+                            <strong>Liczba stron:</strong> {{ book.pages }}
                         </p>
                     </div>
                     
-                    <div class="mt-4">
-                        <a href="{% url 'manage_books:book' book.id %}" class="inline-block bg-slate-800 text-white px-4 py-2 rounded hover:bg-amber-500 hover:text-slate-900 transition">
+                    <div class="mt-6">
+                        <a href="{% url 'manage_books:book' book.id %}" class="inline-block bg-slate-800 text-white px-4 py-2 rounded hover:bg-amber-500 hover:text-slate-900 transition w-full text-center font-medium">
                             Zobacz szczegóły
                         </a>
                     </div>
@@ -44,7 +61,7 @@
         </div>
     {% else %}
         <div class="bg-white rounded-lg shadow p-8 text-center border border-slate-100">
-            <p class="text-slate-600 text-lg">Twoja biblioteka jest jeszcze pusta. Czas dodać pierwsze zbiory!</p>
+            <p class="text-slate-600 text-lg">Brak książek w systemie.</p>
         </div>
     {% endif %}
 </div>

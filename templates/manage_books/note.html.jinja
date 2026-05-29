@@ -1,0 +1,28 @@
+{% extends 'base.html.jinja' %}
+
+{% block title %}Tematy i Notatki - Biblioteka Domowa{% endblock %}
+
+{% block content %}
+<div class="py-8 text-slate-800">
+    <h1 class="text-3xl font-bold mb-8">Tematy i Notatki</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for note in notes %}
+            <div class="bg-white rounded-lg shadow-md p-6 border border-slate-100">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2 py-1 rounded">Notatka</span>
+                </div>
+                <p class="text-slate-600 italic">"{{ note.text }}"</p>
+                {% if note.book %}
+                    <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-400">
+                        Dotyczy książki: <strong class="text-slate-500">{{ note.book.title }}</strong>
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="bg-white rounded-lg shadow p-8 text-center border border-slate-100 col-span-3">
+                <p class="text-slate-500 italic">Brak notatek i tematów w bazie danych.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

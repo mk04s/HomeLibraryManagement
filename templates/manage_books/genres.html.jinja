@@ -1,0 +1,20 @@
+{% extends 'base.html.jinja' %}
+
+{% block title %}Gatunki - Biblioteka Domowa{% endblock %}
+
+{% block content %}
+<div class="py-8 text-slate-800">
+    <h1 class="text-3xl font-bold mb-8">Gatunki Literackie</h1>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {% for genre in genres %}
+            <div class="bg-white rounded-lg shadow border border-slate-100 p-4 text-center font-semibold text-slate-700 hover:bg-slate-50 transition">
+                {{ genre.name }}
+            </div>
+        {% empty %}
+            <div class="bg-white rounded-lg shadow p-8 text-center border border-slate-100 col-span-4">
+                <p class="text-slate-500 italic">Brak gatunków w bazie danych.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

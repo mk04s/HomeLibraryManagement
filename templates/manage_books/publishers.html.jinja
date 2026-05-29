@@ -1,0 +1,36 @@
+{% extends 'base.html.jinja' %}
+
+{% block title %}Wydawcy - Biblioteka Domowa{% endblock %}
+
+{% block content %}
+<div class="py-8 text-slate-800">
+    <h1 class="text-3xl font-bold mb-8">Wydawnictwa</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for publisher in publishers %}
+            <div class="bg-white rounded-lg shadow-md p-6 border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800 mb-2">{{ publisher.name }}</h2>
+                    <p class="text-sm text-slate-500 mb-1"><strong>Kraj:</strong> {{ publisher.country }}</p>
+                    <p class="text-sm text-slate-500 mb-4"><strong>Rok założenia:</strong> {{ publisher.founded_year }}</p>
+                </div>
+                
+                {% if publisher.website or publisher.email %}
+                    <div class="border-t border-slate-50 pt-4 flex gap-4 text-xs text-blue-600">
+                        {% if publisher.website %}
+                            <a href="{{ publisher.website }}" target="_blank" class="hover:underline">🌐 Strona WWW</a>
+                        {% endif %}
+                        {% if publisher.email %}
+                            <a href="mailto:{{ publisher.email }}" class="hover:underline">✉ E-mail</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="bg-white rounded-lg shadow p-8 text-center border border-slate-100 col-span-2">
+                <p class="text-slate-500 italic">Brak wydawców w bazie danych.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

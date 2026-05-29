@@ -1,1 +1,21 @@
-{% extends "base.html.jinja" %}
+{% extends 'base.html.jinja' %}
+
+{% block title %}Serie Wydawnicze - Biblioteka Domowa{% endblock %}
+
+{% block content %}
+<div class="py-8 text-slate-800">
+    <h1 class="text-3xl font-bold mb-8">Serie Wydawnicze</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for series in series_list %}
+            <div class="bg-white rounded-lg shadow-md p-6 border border-slate-100">
+                <h2 class="text-xl font-bold text-slate-800 mb-2">📚 {{ series.name }}</h2>
+                <p class="text-sm text-slate-500">Kolekcja książek powiązanych fabularnie lub wydawniczo.</p>
+            </div>
+        {% empty %}
+            <div class="bg-white rounded-lg shadow p-8 text-center border border-slate-100 col-span-2">
+                <p class="text-slate-500 italic">Brak serii wydawniczych w bazie danych.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
